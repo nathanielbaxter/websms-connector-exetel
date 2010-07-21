@@ -179,13 +179,27 @@ public class ConnectorExetel extends Connector {
 			final String customSender = command.getCustomSender();
 			// Default sender.
 			if (customSender == null) {
-				data.add(new BasicNameValuePair(PARAM_SENDER, Utils
-						.national2international(command.getDefPrefix(), Utils
-								.getSender(context, command.getDefSender()))));
+				String sender = Utils.national2international(command
+						.getDefPrefix(), Utils.getSender(context, command
+						.getDefSender()));
+
+				// Remove the + from the start of the sender's number.
+				if (sender.charAt(0) == '+') {
+					sender = sender.substring(1);
+				}
+
+				data.add(new BasicNameValuePair(PARAM_SENDER, sender));
 			}
 			// A custom sender.
 			else {
-				data.add(new BasicNameValuePair(PARAM_SENDER, customSender));
+				String sender = customSender;
+
+				// Remove the + from the start of the sender's number.
+				if (sender.charAt(0) == '+') {
+					sender = sender.substring(1);
+				}
+
+				data.add(new BasicNameValuePair(PARAM_SENDER, sender));
 			}
 			// Message.
 			data.add(new BasicNameValuePair(PARAM_TEXT, command.getText()));
