@@ -76,7 +76,7 @@ public class ConnectorExetel extends Connector {
 	private static final String PARAM_TYPE = "messagetype";
 
 	/** The delimer for the API's response text. */
-	private static final String HTTP_RESPONSE_TEXT_DELIMITER = "|";
+	private static final String HTTP_RESPONSE_TEXT_DELIMITER = "\\|";
 	/** The recipients delimer for the url query. */
 	private static final String RECIPIENTS_DELIMTER = ",";
 	/** The encoding to use for the request. */
