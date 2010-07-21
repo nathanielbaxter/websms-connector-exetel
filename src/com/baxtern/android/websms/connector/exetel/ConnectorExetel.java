@@ -38,8 +38,6 @@ import de.ub0r.android.websms.connector.common.Utils;
 import de.ub0r.android.websms.connector.common.WebSMSException;
 import de.ub0r.android.websms.connector.common.ConnectorSpec.SubConnectorSpec;
 
-// TODO: Check all code, test and bugfix.
-
 /**
  * Receives commands coming as broadcasts from WebSMS.
  * 
@@ -79,7 +77,9 @@ public class ConnectorExetel extends Connector {
 	private static final String HTTP_RESPONSE_TEXT_DELIMITER = "\\|";
 	/** The recipients delimer for the url query. */
 	private static final String RECIPIENTS_DELIMTER = ",";
-	/** The encoding to use for the request. */
+	/** The message type to use. */
+	private static final String HTTP_MESSAGE_TYPE = "Text";
+	/** The encoding to use. Only used for GET requests. */
 	private static final String HTTP_REQUEST_ENCODING = "Unicode";
 
 	/** The parameters returned by the API. */
@@ -204,7 +204,7 @@ public class ConnectorExetel extends Connector {
 			// Message.
 			data.add(new BasicNameValuePair(PARAM_TEXT, command.getText()));
 			// Message type.
-			data.add(new BasicNameValuePair(PARAM_TYPE, HTTP_REQUEST_ENCODING));
+			data.add(new BasicNameValuePair(PARAM_TYPE, HTTP_MESSAGE_TYPE));
 
 			// Only if we have to make a GET request.
 			if (!USE_POST) {
