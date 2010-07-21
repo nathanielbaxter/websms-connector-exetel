@@ -256,6 +256,9 @@ public class ConnectorExetel extends Connector {
 			} catch (ArrayIndexOutOfBoundsException e) {
 				throw new WebSMSException(context,
 						R.string.error_exetel_invalid_return);
+			} catch (NumberFormatException e) {
+				throw new WebSMSException(context,
+						R.string.error_exetel_invalid_return);
 			}
 			// Catch any annoying IO errors.
 		} catch (IOException e) {
