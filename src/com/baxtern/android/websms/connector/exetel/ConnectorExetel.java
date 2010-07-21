@@ -20,7 +20,6 @@
 package com.baxtern.android.websms.connector.exetel;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
@@ -219,18 +218,13 @@ public class ConnectorExetel extends Connector {
 			HttpResponse response = Utils.getHttpClient(url, null, data, null,
 					null, true);
 
-			// Anything other than a HTTP_ACCEPTED http code is a worry!
+			// Get the http response text and status code.
 			int response_code = response.getStatusLine().getStatusCode();
-			if (response_code != HttpURLConnection.HTTP_ACCEPTED) {
-				throw new WebSMSException(context, R.string.error_http, " "
-						+ response_code);
-			}
-
-			// Get the http response text.
 			String response_text = Utils.stream2str(
 					response.getEntity().getContent()).trim();
 			// Log the http response.
-			Log.d(TAG, "HTTP RESPONSE: " + response_text);
+			Log.d(TAG, "HTTP RESPONSE (" + Integer.toString(response_code)
+					+ "): " + response_text);
 
 			// Time to inspect the results of all our hard work!
 			String[] response_data = response_text
